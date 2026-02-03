@@ -1,0 +1,13 @@
+#Controllers
+/app/Services/IpCountry/GeoIpDatabaseManager.php
+/app/Services/IpCountry/IpCountryService.php
+/app/Http/Controllers/Dev/IpCountryTestController.php
+
+#Docs
+/app/Services/IpCountry/GeoIp.md
+
+#Config
+/config/ip_country.php
+
+#Dependencies
+include:commons

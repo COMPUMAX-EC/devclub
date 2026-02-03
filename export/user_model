@@ -1,0 +1,4 @@
+/app/Models/Model.php
+/app/Models/Role.php
+/app/Models/Concerns/**
+/app/Models/User.php

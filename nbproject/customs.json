@@ -1,0 +1,12 @@
+{
+	"elements": {
+		"page": {},
+		"page_header": {},
+		"page_footer": {}
+	},
+	"attributes": {
+		"cellpading": {
+			"context": "table"
+		}
+	}
+}

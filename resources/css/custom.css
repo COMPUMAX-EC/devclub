@@ -1,0 +1,128 @@
+table .handle
+{
+	cursor: grabbing;
+}
+
+.tipo-subscripcion .badge
+{
+	font-size: 10pt!important;
+	padding: 6pt;
+	margin: 0px;
+	margin-left: 6pt;
+}
+
+.btn i.bi {
+  padding-right: 0px!important;
+  padding-left: 0px!important;
+}
+
+h1 .badge
+{
+	font-size: 12px;
+	
+}
+
+.input-group .btn
+{
+	border: solid 1px var(--bs-gray-300)!important;
+}
+
+.table thead th
+{
+	font-size: 0.9rem!important;
+	font-weight: bold!important;
+	color:#999!important;
+	text-transform: uppercase!important;
+	vertical-align: middle;
+	border-bottom-color: var(--bs-gray-300)!important;
+	padding: 1rem 1rem 1rem 1rem;
+}
+
+.table tbody tr td
+{
+	font-size: 1rem!important;
+	color:#666!important;
+	vertical-align: middle;
+	border-bottom-color: var(--bs-gray-300)!important;
+	padding: 1rem 1rem 1rem 1rem;
+}
+
+.table tbody tr.border_color_darker td
+{
+	border-top: solid 1pt var(--bs-gray-300)!important;
+}
+
+.table tbody tr .main
+{
+/*	font-size: 1.1rem!important;*/
+	color:#333!important;
+	font-weight: bold;
+}
+
+.table tr td:first-child,
+.table tr th:first-child
+{
+	padding-left: 20px!important;
+}
+
+.table tr td:last-child,
+.table tr th:last-child
+{
+	padding-right: 20px!important;
+}
+.table-condensed td,
+.table-condensed th
+{
+	padding-top: 0.5rem!important;
+	padding-bottom: 0.5rem!important;
+}
+
+.table-condensed .btn-sm
+{
+  padding: calc(0.2rem + 1px) calc(0.4rem + 1px) !important;
+  font-size: 0.90rem;
+  border-radius: 0.425rem;
+  font-weight: normal;
+}
+
+
+
+/* Para drag&drop */
+.drag-handle .fa-solid
+{
+	font-size: 1.2rem!important;
+}
+
+.drag-handle
+{
+	padding: 3px 10px 3px 10px!important;
+	cursor: move;
+	user-select: none;
+}
+
+.drag-handle:hover
+{
+	background-color: #FFC;
+}
+
+.table-active {
+	transition: background-color 0.15s ease;
+}
+.row-move {
+  transition: transform 0.15s ease;
+}
+
+.header
+{
+	z-index: 10;
+}
+
+
+.text-bg-primary,
+.text-bg-secondary,
+.text-bg-success,
+.text-bg-danger,
+.text-bg-dark
+{
+  color: #fff !important;
+}

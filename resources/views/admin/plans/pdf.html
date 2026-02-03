@@ -1,0 +1,499 @@
+<style>
+	/*
+		Tenemos disponible las fuentes:
+ 
+		urbanist -> Urbanist Regular
+		urbanistthin -> Urbanist Thin
+		urbanistblack -> Urbanist Black
+	*/
+
+	* {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+		font-family: urbanist;
+	}
+
+	/* Para usar de forma genérica en cualquier box que necesite una imagen de fondo */
+	.box-con-fondo
+	{
+		position: relative;
+	}
+
+	/* La imagen de fondo del box con fondo */
+	.box-fondo
+	{
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: auto;
+	}
+
+	/* El elemento que va a estar encima de este fondo */
+	.box-con-fondo .box-contenido
+	{
+		position: absolute;
+		left: 0;
+		top: 0;
+	}
+
+	.mb
+	{
+		margin-bottom: 10mm;
+	}
+
+	.mb-sm
+	{
+		margin-bottom: 5mm;
+	}
+
+	.caja-contacto-asistencia {
+	}
+
+	.caja-contacto-asistencia-correo {
+		font-weight: bold;
+		font-size: 5.5mm;
+		color: white;
+		top: 10mm;
+		left: 10mm;
+	}
+
+	.caja-contacto-asistencia-whatsapp {
+		font-weight: bold;
+		font-size: 4.1mm;
+		color: black;
+		top: 11.5mm;
+		left: 99mm;
+	}
+
+	.caja-contacto-asistencia-alarmCenter {
+		font-weight: bold;
+		font-size: 4.1mm;
+		color: black;
+		top: 11.5mm;
+		left: 154mm;
+	}
+
+	/* Info del inicio del PDF */
+	.header-info
+	{
+		padding-top: 2.3mm;
+		font-size: 12pt;
+		color: #FFF;
+	}
+
+	.header-info .plan_titulo
+	{
+		padding-left: 23mm;
+		font-weight: bold;
+	}
+
+	.header-info .plan_titulo .nombre
+	{
+		color: #55D78E;
+	}
+
+	.header-info .plan_codigo
+	{
+		padding-left: 23mm;
+	}
+
+
+	/* card */
+	.card
+	{
+
+	}
+	.card-header
+	{
+		color: white;
+		font-size: 5mm;
+		font-weight: bold;
+	}
+
+	.card-header-title
+	{
+		padding-top: 6.5mm;
+		padding-left: 5mm;
+		font-weight: bold;
+		font-family: urbanistblack;
+		font-size: 16pt;
+	}
+
+	.card-body
+	{
+		background-color: white;
+		margin-top: -1pt;
+	}
+
+	.card-footer
+	{
+		margin-top: -1pt;
+	}
+
+	.titulo-oscuro
+	{
+		color: #8251F9;
+		font-size: 5mm;
+		font-weight: bold;
+		font-family: urbanistblack;
+	}
+
+	.datos-oscuro
+	{
+		color: #3E2234;
+		font-size: 5mm;
+		font-family: urbanistblack;
+	}
+
+	.tabla_fecha_coberturas
+	{
+		
+	}
+	
+	.tabla_fecha_coberturas .titulo
+	{
+		font-size: 15pt;
+		font-weight: bold;
+		color: #3E2234;
+		font-family: urbanistblack;
+	}
+	
+	.tabla_fecha_coberturas .fecha
+	{
+		color: #666;
+		font-size: 14pt;
+		font-weight: bold;
+		font-family: urbanistthin;
+	}
+	
+	.tabla_fecha_coberturas .fecha_color
+	{
+		color: #8251F9;
+	}
+	
+	
+	.tabla_coberturas
+	{
+		width: 100%;
+	}
+	
+	.tabla_coberturas .titulo_categoria
+	{
+		width: 80%;
+		height: 6mm;
+		text-align: left;
+		vertical-align: middle;
+		font-weight: bold;
+		color: white;
+		font-size: 13pt;
+	}
+	
+	.tabla_coberturas .cobertura
+	{
+		padding-top: 0;
+		left: 18mm;
+		width: 64%;
+		height: 14mm;
+		text-align: left;
+		vertical-align: middle;
+		color: #3E2234;
+		font-size: 12pt;
+	}
+
+	.tabla_coberturas .alcance
+	{
+		padding-top: 0;
+		right: 10mm;
+		width: 22%;
+		height: 14mm;
+		text-align: right;
+		vertical-align: middle;
+		color: #8251F9;
+		font-size: 11pt;
+		font-weight: bold;
+	}
+
+	
+	/**************/
+	/* Para debug */
+	/**************/
+	.debug table
+	{
+		border: solid 0.5pt yellow;
+	}
+	.debug td
+	{
+		border: dashed 0.5pt #F00;
+	}
+
+	.debug div
+	{
+		border: dotted 0.5pt #0F0;
+	}
+
+	.debug div div
+	{
+		border: dotted 0.5pt yellow;
+	}
+	
+
+	.page-break
+	{
+		page-break-before: always;
+	}
+</style>
+
+<!-- Esta etiqueta define una página nueva -->
+<page backtop="30mm" backbottom="40mm" backimg="pdf/assets/fondo.jpg" backimgx="0mm" backimgy="0mm" backimgw="215.9mm" class="">
+	<!-- Esta etiqueta define el header para esta página, debe ser el primer elemento -->
+	<page_header class="">
+		<table cellpadding="0" cellspacing="0" style="width: 100%;">
+			<tbody>
+				<tr>
+					<td style="width: 50%; text-align: center; vertical-align: middle; height: 20mm;">
+						<img src="pdf/assets/logos/logo-dark.png" alt="" class="logo-header" style="width: auto; height: 14mm; margin-right: 20mm; ">
+					</td>
+					<td style="width: 50%; height: 20mm; vertical-align: middle;">
+						<div class="box-con-fondo">
+							<img src="pdf/assets/header-title.png" alt="" class="box-fondo" />
+							<div class="header-info box-contenido">
+								<div class="plan_titulo">
+									PLAN: <span class="nombre" style="text-transform: uppercase;">“{{ $product->name }}”</span>
+								</div>
+								<div class="plan_codigo">
+									#YTB-0000123456
+								</div>
+							</div>
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</page_header>
+
+	<page_footer>
+		<div class="box-con-fondo">
+			<img src="pdf/assets/footer.png" class="box-fondo" />
+			<div class="box-contenido" style="width: 100%; height: 18mm; text-align: center; vertical-align: middle; color: #FFF; font-size: 12pt; font-weight: bold;">
+				WWW.YASTUBO.COM
+			</div>
+		</div>
+		<div style="text-align: right;">
+			#PLAN - #Version - Validation Code: AXR-143-PQE-33R
+		</div>
+	</page_footer>
+
+
+
+	<div class="card mb">
+		<div class="card-header box-con-fondo">
+
+			<img src="pdf/assets/card-top.png" alt="" class="box-fondo"/>
+
+			<!-- Capa de contenido, por encima de la imagen -->
+			<div class="box-contenido card-header-title">
+				INFORMACIÓN BENEFICIARIO
+			</div>
+		</div>
+
+		<div class="card-body">
+			<table cellpadding="0" cellspacing="0" style="width: 100%; margin-top: 2mm;">
+				<tr>
+					<td style="width: 24%; text-align: left; vertical-align: top;">
+						<img src="pdf/assets/icons/usuario.png" alt="" style="width: 31mm; height: auto; margin-left: 7mm; margin-bottom: 0; margin-right: 2mm;" />
+					</td>
+					<td style="width: 38%">
+						<div class="titulo-oscuro">Nombre:</div>
+						<div class="datos-oscuro">Martin Freidell Vasquez</div>
+						<div></div>
+						<div class="titulo-oscuro">N° Identificación:</div>
+						<div class="datos-oscuro">PA - BF985256</div>
+					</td>
+					<td style="width: 38%">
+						<div class="titulo-oscuro">Nacionalidad:</div>
+						<div class="datos-oscuro">Chile</div>
+						<div></div>
+						<div class="titulo-oscuro">Fecha Nacimiento:</div>
+						<div class="datos-oscuro">29/09/1993</div>
+					</td>
+				</tr>
+			</table>
+		</div>
+
+		<div class="card-footer">
+			<img src="pdf/assets/card-bottom.png" alt="" style="width: 100%; height: auto;" />
+		</div>
+
+	</div>
+
+
+
+	<div class="caja-contacto-asistencia box-con-fondo mb">
+		<img src="pdf/assets/asistencia.png" alt="" class="box-fondo" />
+		<div class="box-contenido caja-contacto-asistencia-correo">Asistencias@yastubo.com</div>
+		<div class="box-contenido caja-contacto-asistencia-whatsapp">+1 305 447 7669</div>
+		<div class="box-contenido caja-contacto-asistencia-alarmCenter">+1 305 447 7669</div>
+	</div>
+
+	
+	<table cellpadding='0' cellspacing='0' class="tabla_fecha_coberturas mb-sm" style="width: 100%;">
+		<tbody>
+			<tr>
+				<td style="width: 50%; text-align: left;" class="titulo" >COBERTURA</td>
+				<td style="width: 50%; text-align: right;" class="fecha">Fecha de suscripción: <span class="fecha_color">01/10/2025</span></td>
+			</tr>
+		</tbody>
+	</table>
+
+	@php
+		$notes = [];
+	@endphp
+	@foreach($coverageCategories as $category)
+	<table cellpadding='0' cellspacing='0' class="tabla_coberturas mb-sm">
+		<thead>
+			<tr>
+				<th style="width: 100%;">
+					<div class="box-con-fondo">
+						<img src="pdf/assets/coverages/head.png" class="box-fondo" />
+					</div>
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td style="width: 100%; background-color: #3E2234; height: 9mm;" >
+					<div class="box-con-fondo" style="margin-top: -0.5pt;">
+						<img src="pdf/assets/coverages/title.png" class="box-fondo" style="width: 100%; height: 9mm;" />
+						<div class="box-contenido" style="top: 0; left: 0; width: 100%;">
+							<img src="pdf/assets/coverages/check-verde.png" class="box-fondo" style="width: 6mm; height: auto; margin-left: 8.9mm; margin-right: 3.2mm;" />
+							<div class="titulo_categoria">{{ $category['name'] }}</div>
+						</div>
+					</div>
+				</td>
+			</tr>
+			@foreach($category['coverages'] as $coverage)
+				@php
+					$n = null;
+					if(!empty($coverage['notes_t']))
+					{
+						$n = count($notes)+1;
+						$notes[] = $coverage['notes_t'];
+					}
+				@endphp
+			<tr>
+				<td style="width: 100%;">
+					<div class="box-con-fondo" style="margin-top: -0.3pt;">
+						<img src="pdf/assets/coverages/body.png" class="box-fondo" />
+						<div class="box-contenido cobertura">
+							{{ $coverage['coverage_name'] }} {{ $n ? "({$n})":"" }}
+						</div>
+						<div class="box-contenido alcance">{{ $coverage['display_value'] }}</div>
+					</div>
+				</td>
+			</tr>
+			@endforeach
+		</tbody>
+		<tfoot>
+			<tr>
+				<td style="width: 100%;">
+					<div class="box-con-fondo" style="margin-top: -0.5pt;">
+						<img src="pdf/assets/coverages/foot.png" class="box-fondo" />
+					</div>
+				</td>
+			</tr>
+		</tfoot>
+	</table>
+	@endforeach
+	
+	
+	@if(count($notes))
+		<hr/>
+		Notas
+		<ol>
+		@foreach($notes as $i=>$note)
+		<li>{{ $note }}</li>
+		@endforeach
+		</ol>
+	@endif
+</page>
+
+<style>
+	.terminos
+	{
+		line-height: 18pt;
+		font-size: 12pt;
+	}
+	.terminos li
+	{
+		padding-bottom: 10pt;
+	}
+	
+	.terminos br
+	{
+		line-height: 20pt;
+	}
+	.terminos h1
+	{
+		font-size: 16pt;
+		line-height: 20pt;
+		text-align: center;
+		margin-top: 2mm;
+		margin-bottom: 2mm;
+	}
+	.terminos h2
+	{
+		font-size: 14pt;
+		line-height: 18pt;
+		text-align: left;
+		margin-top: 2mm;
+		margin-bottom: 2mm;
+	}
+	
+</style>
+
+@if(!empty($planVersion->terms_html))
+<page backtop="35mm" backbottom="40mm" backleft="5mm" backright="5mm" backimg="pdf/assets/fondo-blanco.jpg" backimgx="0mm" backimgy="0mm" backimgw="215.9mm" class="terminos">
+	<!-- Esta etiqueta define el header para esta página, debe ser el primer elemento -->
+	<page_header class="">
+		<table cellpadding="0" cellspacing="0" style="width: 100%;">
+			<tbody>
+				<tr>
+					<td style="width: 50%; text-align: center; vertical-align: middle; height: 20mm;">
+						<img src="pdf/assets/logos/logo-dark.png" alt="" class="logo-header" style="width: auto; height: 14mm; margin-right: 20mm; ">
+					</td>
+					<td style="width: 50%; height: 20mm; vertical-align: middle;">
+						<div class="box-con-fondo">
+							<img src="pdf/assets/header-title.png" alt="" class="box-fondo" />
+							<div class="header-info box-contenido">
+								<div class="plan_titulo">
+									PLAN: <span class="nombre" style="text-transform: uppercase;">“{{ $product->name }}”</span>
+								</div>
+								<div class="plan_codigo">
+									#YTB-0000123456
+								</div>
+							</div>
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</page_header>
+
+	<page_footer>
+		<div class="box-con-fondo">
+			<img src="pdf/assets/footer.png" class="box-fondo" />
+			<div class="box-contenido" style="width: 100%; height: 18mm; text-align: center; vertical-align: middle; color: #FFF; font-size: 12pt; font-weight: bold;">
+				WWW.YASTUBO.COM
+			</div>
+		</div>
+		<div style="text-align: right;">
+			#PLAN - #Version - Validation Code: AXR-143-PQE-33R
+		</div>
+	</page_footer>
+
+	
+	{!! $planVersion->terms_html !!}
+</page>
+@endif

@@ -1,0 +1,28 @@
+#Entry Point
+/resources/js/app.js
+/composer.json
+/package.json
+/vite.config.js
+
+#Base Layout
+/resources/views/layouts/craft.blade.php
+
+#Base Model
+/app/Models/Model.php
+
+#Base Controller
+/app/Http/Controllers/Controller.php
+
+#Format Service
+/app/Support/FormatService.php
+/config/format.php
+
+#Translate Cast / Model Commons
+/app/Casts/TranslatableJson.php
+/app/Models/Concerns/**
+
+#Front Values
+/config/ui.php
+
+#base route
+/routes/web.php
