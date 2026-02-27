@@ -1,7 +1,8 @@
 from fastapi import APIRouter, Depends, HTTPException, UploadFile, File as UploadFileType, BackgroundTasks
 from sqlmodel import Session
 from typing import List
-from .. import db, crud, schemas, tasks
+from .. import db, crud, schemas, tasks, models
+from ..auth import get_current_user, require_permission
 from ..storage import save_file
 
 router = APIRouter()
@@ -17,7 +18,7 @@ def get_db():
 
 
 @router.post("/", response_model=schemas.TemplateRead)
-def create_template(payload: schemas.TemplateCreate, session: Session = Depends(get_db)):
+def create_template(payload: schemas.TemplateCreate, session: Session = Depends(get_db), user: dict = Depends(require_permission("templates.edit"))):
     tpl = crud.create_template(session, name=payload.name, slug=payload.slug, type=payload.type)
     return tpl
 
@@ -28,7 +29,7 @@ def list_templates(session: Session = Depends(get_db)):
 
 
 @router.post("/{template_id}/versions", response_model=dict)
-def create_version(template_id: int, payload: schemas.TemplateVersionCreate, session: Session = Depends(get_db)):
+def create_version(template_id: int, payload: schemas.TemplateVersionCreate, session: Session = Depends(get_db), user: dict = Depends(require_permission("templates.edit"))):
     tpl = crud.get_template(session, template_id)
     if not tpl:
         raise HTTPException(status_code=404, detail="Template not found")
@@ -38,13 +39,8 @@ def create_version(template_id: int, payload: schemas.TemplateVersionCreate, ses
 
 @router.post("/{template_id}/versions/{version_id}/generate", response_model=dict)
 def generate_pdf(template_id: int, version_id: int, payload: schemas.GenerateRequest, background_tasks: BackgroundTasks, session: Session = Depends(get_db)):
-    v = session.get("TemplateVersion", version_id)
-    # simple lookup via SQLModel
-    tv = session.get(object, version_id)
-    # fallback: fetch from crud
-    from ..models import TemplateVersion
-    tv = session.get(TemplateVersion, version_id)
-    if not tv:
+    tv = session.get(models.TemplateVersion, version_id)
+    if not tv or tv.template_id != template_id:
         raise HTTPException(status_code=404, detail="Version not found")
 
     # schedule celery task
@@ -53,7 +49,12 @@ def generate_pdf(template_id: int, version_id: int, payload: schemas.GenerateReq
 
 
 @router.post("/{template_id}/versions/{version_id}/files")
-def upload_file(template_id: int, version_id: int, upload: UploadFile, session: Session = Depends(get_db)):
+def upload_file(template_id: int, version_id: int, upload: UploadFile = UploadFileType(...), session: Session = Depends(get_db)):
+    # validate version exists
+    tv = session.get(models.TemplateVersion, version_id)
+    if not tv or tv.template_id != template_id:
+        raise HTTPException(status_code=404, detail="Version not found")
+
     content = upload.file.read()
     path = save_file(BinaryIOWrapper(content), upload.filename)
     return {"path": path}
