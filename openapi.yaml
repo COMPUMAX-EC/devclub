@@ -1,0 +1,51 @@
+openapi: 3.0.3
+info:
+  title: DevClub / API (stub)
+  version: 0.1.0
+  description: API mínima para documentar endpoints críticos (planes, coberturas, usuarios).
+servers:
+  - url: http://localhost:8080
+
+paths:
+  /api/plans:
+    get:
+      summary: List plans
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Plan'
+
+  /api/plans/{id}:
+    get:
+      summary: Get plan by id
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Plan'
+
+components:
+  schemas:
+    Plan:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: object
+          description: Translatable JSON (es/en) as TEXT in DB
+        description:
+          type: object
