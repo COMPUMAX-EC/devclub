@@ -42,5 +42,26 @@ services:
     depends_on:
       - app
 
+  templates_service:
+    build:
+      context: ./services/templates_service
+    image: devclub_templates:latest
+    container_name: devclub_templates
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./services/templates_service:/app
+    environment:
+      - DATABASE_URL=mysql+pymysql://root:root@mysql:3306/devclub
+    depends_on:
+      - mysql
+      - redis
+
+  redis:
+    image: redis:7-alpine
+    container_name: devclub_redis
+    ports:
+      - "6379:6379"
+
 volumes:
   db_data:
